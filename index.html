@@ -9,12 +9,24 @@
 </head>
 <body>
 
-  <div id="app">
-    {{ message }}
+  <!-- <div id="index">
+    {{text.title}}
+    <br>
+    <h1>Test</h1>
+    <div id="test">
+      {{text.copy}}
+    </div>
+    <br>
+    {{text.image}}
+  </div> -->
+  <div id="index">
+    <repeater :info="header"></repeater>
+    <repeater :info="service_1"></repeater>
+    <repeater :info="service_2"></repeater>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
