@@ -1,6 +1,6 @@
 Vue.component('repeater', {
   props: ['info'],
-  template: '<div><h1>{{info.title}}</h1><p>{{info.copy}}</p></div>'
+  template: '<div><h1>{{info.title}}</h1><p>{{info.copy}}</p><img :src="info.image"></div>'
 });
 
 new Vue({
@@ -21,6 +21,11 @@ new Vue({
         title: '',
         copy: '',
         image: ''
+      },
+      service_3:{
+        title: '',
+        copy: '',
+        image: ''
       }
     }
   },
@@ -35,14 +40,23 @@ new Vue({
       content_type: 'solutions'
     })
     .then((entry) => {
+      entry.items.sort((a,b)=>(a.fields.orderOnPage)-(b.fields.orderOnPage))
       console.log(entry)
-      // return this.header.title = entry.items[4].fields.title,
-      //   this.header.copy = entry.items[4].fields.copy,
-      //   this.header.image = entry.items[4].sys.createdAt,
-      //   this.service_1.title = entry.items[1].fields.title,
-      //   this.service_1.copy = entry.items[1].fields.modules[0].fields.copy,
-      //   this.service_2.title = entry.items[30].fields.modules[0].fields.title,
-      //   this.service_2.copy = entry.items[30].fields.modules[0].fields.copy
+      return this.header.title = entry.items[0].fields.titleOfSolution[0],
+        this.header.copy = entry.items[0].fields.description,
+        this.header.image = 'https:'+entry.items[0].fields.imgForSolution.fields.file.url+'?w=400',
+
+        this.service_1.title = entry.items[1].fields.titleOfSolution[0],
+        this.service_1.copy = entry.items[1].fields.description,
+        // this.service_1.image = entry.items[1].fields.imgForSolution.fields.file.url,
+
+        this.service_2.title = entry.items[2].fields.titleOfSolution[0],
+        this.service_2.copy = entry.items[2].fields.description,
+        // this.service_2.image = entry.items[2].fields.imgForSolution.fields.file.url,
+
+        this.service_3.title = entry.items[3].fields.titleOfSolution[0],
+        this.service_3.copy = entry.items[3].fields.description
+        // this.service_2.image = entry.items[3].fields.imgForSolution.fields.file.url
     }).catch((err) => console.log(err))
   }
 })
